@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Data Barang - Alat Tulis Kantor</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        h2 {
+            margin-top: 40px;
+            color: #007BFF;
+        }
+
+        /* Table styling */
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #007BFF;
+        }
+
+        /* Form styling */
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: 30px auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        select, input[type="text"], input[type="number"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            transition: border 0.3s;
+        }
+        select:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 80%;
+            }
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>GiNuAuFaRi - Alat Tulis</h1>
+
+    <!-- Data Tabel -->
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Merk Barang</th>
+                <th>Jenis Barang</th>
+                <th>Jumlah</th>
+                <th>Harga</th>
+                <th>Total Harga</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="data-table">
+            <!-- Data akan dimasukkan secara dinamis -->
+        </tbody>
+    </table>
+
+    <!-- Total Price Table -->
+    <h2>Total Harga Keseluruhan</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Total Barang</th>
+                <th>Total Harga (Rp)</th>
+                <th>Total Pemasukan (Rp)</th>
+                <th>Total Pengeluaran (Rp)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="total-barang">0</td>
+                <td id="total-harga">0</td>
+                <td id="total-pemasukan">0</td>
+                <td id="total-pengeluaran">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Add / Edit Form-->
+    <div class="form-container">
+        <h2>Tambah / Edit Barang</h2>
+        <form id="barang-form">
+            <div class="form-group">
+                <label for="nama">Merk Barang</label>
+                <select id="nama" required>
+                    <option value=""></option>
+                    <option value="Pilot">Pilot</option>
+                    <option value="Snowman">Snowman</option>
+                    <option value="Steadler 2B">Steadler 2B</option>
+                    <option value="Montana">Montana</option>
+                    <option value="Kenko">Kenko</option>
+                    <option value="Sinar Dunia">Sinar Dunia</option>
+                    <option value="Sidu">Sidu</option>
+                    <option value="Maxi">Maxi</option>
+                    <option value="Butterfly">Butterfly</option>
+                    <option value="Kayagi">Kayagi</option>
+                    <option value="Faber-Castell">Faber-Castell</option>
+                    <option value="Joyko">Joyko</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="kategori">Jenis Barang</label>
+                <select id="kategori" required>
+                    <option value=""></option>
+                    <option value="Pulpen">Pulpen</option>
+                    <option value="Pensil">Pensil</option>
+                    <option value="Buku">Buku</option>
+                    <option value="Kertas">Kertas</option>
+                    <option value="Penggaris">Penggaris</option>
+                    <option value="Rautan">Rautan</option>
+                    <option value="Penghapus">Penghapus</option>
+                    <option value="Gunting">Gunting</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="jumlah">Jumlah</label>
+                <input type="number" id="jumlah" required>
+            </div>
+            <div class="form-group">
+                <label for="harga">Harga</label>
+                <input type="number" id="harga" required>
+            </div>
+            <div class="form-group">
+                <label for="tanggal">Tanggal</label>
+                <input type="date" id="tanggal" required>
+            </div>
+            <button type="submit">Simpan</button>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const form = document.getElementById("barang-form");
+        const table = document.getElementById("data-table");
+        const totalBarangElement = document.getElementById("total-barang");
+        const totalHargaElement = document.getElementById("total-harga");
+        const totalPemasukanElement = document.getElementById("total-pemasukan");
+        const totalPengeluaranElement = document.getElementById("total-pengeluaran");
+
+                // Mengambil data barang dari localStorage, atau inisialisasi jika kosong
+                let barangList = JSON.parse(localStorage.getItem("barangList")) || [];
+
+function renderTable() {
+    table.innerHTML = "";
+    let totalBarang = 0;
+    let totalHarga = 0;
+    let totalPemasukan = 0;
+    let totalPengeluaran = 0;
+
+    barangList.forEach((barang, index) => {
+        const totalPerItem = barang.jumlah * barang.harga;
+        totalBarang += parseInt(barang.jumlah);
+        totalHarga += totalPerItem;
+        totalPemasukan += totalPerItem; // Assuming same price for selling
+        totalPengeluaran += totalPerItem;
+
+        const row = `
+            <tr>
+                <td>${index +1}</td>
+                <td>${barang.tanggal}</td>
+                <td>${barang.nama}</td>
+                <td>${barang.kategori}</td>
+                <td>${barang.jumlah}</td>
+                <td>Rp ${parseInt(barang.harga).toLocaleString('id-ID')}</td>
+                <td>Rp ${totalPerItem.toLocaleString('id-ID')}</td>
+                <td>
+                    <button onclick="editBarang(${index})">Edit</button>
+                            <button onclick="deleteBarang(${index})">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                table.innerHTML += row;
+            });
+
+            totalBarangElement.textContent = totalBarang;
+            totalHargaElement.textContent = totalHarga.toLocaleString('id-ID');
+            totalPemasukanElement.textContent = totalPemasukan.toLocaleString('id-ID');
+            totalPengeluaranElement.textContent = totalPengeluaran.toLocaleString('id-ID');
+        }
+
+        function editBarang(index) {
+            const barang = barangList[index];
+            document.getElementById("nama").value = barang.nama;
+            document.getElementById("kategori").value = barang.kategori;
+            document.getElementById("jumlah").value = barang.jumlah;
+            document.getElementById("harga").value = barang.harga;
+            document.getElementById("tanggal").value = barang.tanggal;
+            form.dataset.index = index; // Simpan index barang yang sedang diedit
+        }
+
+        function deleteBarang(index) {
+            if (confirm("Apakah Anda Yakin Ingin Menghapus Barang Ini?")) {
+                barangList.splice(index, 1);
+                localStorage.setItem("barangList", JSON.stringify(barangList)); // Simpan ke localStorage
+                renderTable();
+            }
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const nama = document.getElementById("nama").value;
+            const kategori = document.getElementById("kategori").value;
+            const jumlah = document.getElementById("jumlah").value;
+            const harga = document.getElementById("harga").value;
+            const tanggal = document.getElementById("tanggal").value;
+
+            const barang = { nama, kategori, jumlah, harga, tanggal };
+
+            const index = form.dataset.index;
+
+            if (index !== undefined) {
+                // Edit barang
+                barangList[index] = barang;
+                delete form.dataset.index; // Hapus index setelah diedit
+            } else {
+                // Tambah barang baru
+                barangList.push(barang);
+            }
+
+            form.reset();
+            localStorage.setItem("barangList", JSON.stringify(barangList)); // Simpan ke localStorage
+            renderTable();
+        });
+
+        // Render tabel saat halaman dimuat
+        renderTable();
+    </script>
+</body>
+</html>
